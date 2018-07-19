@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Resources\YueDanResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::prefix('v1')->group(function () {
+Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::apiResources([
             'yuedan' => 'API\YueDanController',
             'participator' => 'API\ParticipatorController'
     ]);
+
+    Route::get('yuedans', function () {
+        $user = Auth::guard('api')->user();
+        return YueDanResource::collection(\App\YueDan::byParticipator($user['id'])->simplePaginate(5));
+    });
 });
