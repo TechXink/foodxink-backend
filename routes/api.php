@@ -15,6 +15,10 @@ use App\Http\Resources\YueDanResource;
 |
 */
 
+# 用户点击登录按钮时请求的地址
+Route::post('/auth/oauth', 'Auth\AuthController@oauth');
+
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -28,4 +32,6 @@ Route::prefix('v1')->middleware('auth:api')->group(function () {
         $user = Auth::guard('api')->user();
         return YueDanResource::collection(\App\YueDan::byParticipator($user['id'])->simplePaginate(5));
     });
+
+    Route::post('yuedan/uploadimg', 'API\YueDanController@uploadImg');
 });

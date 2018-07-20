@@ -32,9 +32,12 @@ class YueDan extends Model
     public static function byParticipator($sponsor_id)
     {
         // return $this->hasMany('App\Participator', 'yuedan_id', 'id');
-        return $users = DB::table('yuedan')->where('sponsor_id', $sponsor_id)
-            ->leftJoin('participator', 'sponsor_id', '=', 'user_id')
-            ;//->get();
+
+
+        return YueDan::groupBy(['yuedan.id'])->select(['sponsor_id','title','description','close_time',
+            'eat_time','address','latitude','longitude','location_name','image'])->where('sponsor_id', $sponsor_id)
+        ->join('participator', 'sponsor_id', '=', 'user_id')
+        ;//->get();
     }
 
 

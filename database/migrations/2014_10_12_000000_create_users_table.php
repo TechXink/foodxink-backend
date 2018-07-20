@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('unionid', 100)->default('')->comment('只有在用户将公众号绑定到微信开放平台帐号后，才会出现该字段。');
             $table->string('api_token', 50)->index()->comment('api token');
             $table->smallInteger('expires_in')->default(7200)->comment('接口调用凭证超时时间，单位（秒）');
+            $table->smallInteger('credit_score')->default(200)->comment('信用分');
             $table->timestamps();
         });
     }

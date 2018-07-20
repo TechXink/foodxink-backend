@@ -44,7 +44,7 @@ class YueDanController extends Controller
         try {
             $avatar_group = Participator::getAvatarGroup();
 
-            $data['sponsor_id'] = \Auth::guard('api')->id();
+            $data['sponsor_id'] = \Auth::guard('api')->id();//\Auth::id();
             $data['avatar_group'] = $avatar_group;
 
             $res = YueDan::create($data);
@@ -59,13 +59,26 @@ class YueDanController extends Controller
             Participator::create($par_data);
             DB::commit();
 
-            return response()->json(['code' => 0, 'message'=>'success']);
+            return response()->json(['code' => 0, 'message'=>'success', 'yue_id' => $res->id]);
 
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['code' => -1, 'message' => $e->getMessage()], 500);
         }
 
+    }
+
+    public function uploadImg(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'upload-img' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['code' => -1, 'message' => $validator->errors()], 422);
+        }
+        $img = $request->file('upload-img')->store('/public/img/'.date('Y-m-d'));
+        $img_url = \Storage::url($img);
+        return response()->json(['code' => 0, 'message' => 'success', 'imgUrl' => $img_url]);
     }
 
     /**
