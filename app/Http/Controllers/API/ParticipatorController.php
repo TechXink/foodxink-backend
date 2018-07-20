@@ -82,9 +82,15 @@ class ParticipatorController extends Controller
      * @param  $user_id 用户id
      * @return bool
      */
-    public function join($id,$user_id)
+    public function join($id,$token)
     {
         //Participator::updated(['is_join'=>1]);
+        $user_id = DB::table("users")->where('api_token',$token)->pluck('id')->first();
+
+        if(!$user_id){
+            return ['status'=>1,'message'=>'用户已过期或不存在'];
+        }
+
         $bool = DB::table("Participator")->where(['yuedan_id'=>$id,'user_id'=>$user_id])->update(['is_join'=>1]);
         if($bool || empty($bool)){
             return ['status'=>0,'message'=>'赴约成功'];

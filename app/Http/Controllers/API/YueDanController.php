@@ -90,7 +90,7 @@ class YueDanController extends Controller
     public function more(){
         //return YueDan::simplePaginate(5);
         //return YueDan::where('create_time','>',DATE_SUB(NOW(),'INTERVAL 1 HOUR'));
-        $yuedanInfo = DB::select(' select id,title,eat_time,latitude,longitude,image from yuedan where create_time > unix_timestamp(DATE_SUB(NOW(),INTERVAL 1 HOUR))');
+        $yuedanInfo = DB::select(' select id,title,eat_time,latitude,longitude,image from yuedan where create_time > unix_timestamp(DATE_SUB(NOW(),INTERVAL 1 DAY))');
         return $yuedanInfo;
     }
 }
