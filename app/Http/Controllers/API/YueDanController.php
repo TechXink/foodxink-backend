@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests\StoreYuedanPost;
+use App\Participator;
 use App\YueDan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,7 +19,7 @@ class YueDanController extends Controller
      */
     public function index()
     {
-        return YueDan::simplePaginate(5);
+        return YueDan::select(['title'])->simplePaginate(5);
         //return YueDan::paginate(5);
 
     }
@@ -27,7 +28,7 @@ class YueDanController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\jsonResponse
+     * @return \Illuminate\Http\Response
      */
     public function store(StoreYuedanPost $request)
     {
@@ -36,16 +37,48 @@ class YueDanController extends Controller
         $data['create_time'] = time();
 
         // 验证 https://docs.golaravel.com/docs/4.1/validation/
-        $yueDan = new YueDan();
 
-        $res = $yueDan->create($data);
-        if ($res) {
-            return response()->json(['code' => 0, 'message'=>'success']);
 
-        } else {
-            return response()->json(['code' => -1, 'message' => '数据保存失败']);
+        DB::beginTransaction();
+
+        try {
+            $avatar_group = Participator::getAvatarGroup();
+
+            $data['sponsor_id'] = \Auth::guard('api')->id();//\Auth::id();
+            $data['avatar_group'] = $avatar_group;
+
+            $res = YueDan::create($data);
+            $par_data = [
+                'yuedan_id' => $res->id,
+                'user_id' => $data['sponsor_id'],
+                'avatar_url' => Participator::getAvatarUrl($avatar_group),
+                'join_time' => time(),
+                'name' => Participator::getRandName()
+            ];
+
+            Participator::create($par_data);
+            DB::commit();
+
+            return response()->json(['code' => 0, 'message'=>'success', 'yue_id' => $res->id]);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['code' => -1, 'message' => $e->getMessage()], 500);
         }
 
+    }
+
+    public function uploadImg(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'upload-img' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['code' => -1, 'message' => $validator->errors()], 422);
+        }
+        $img = $request->file('upload-img')->store('/public/img/'.date('Y-m-d'));
+        $img_url = \Storage::url($img);
+        return response()->json(['code' => 0, 'message' => 'success', 'imgUrl' => $img_url]);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Resources\YueDanResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+# 用户点击登录按钮时请求的地址
+Route::post('/auth/oauth', 'Auth\AuthController@oauth');
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -26,9 +31,17 @@ Route::prefix('v1')->group(function () {
     Route::get('yuedan/more', 'API\YueDanController@more');
     Route::put('participator/join/{id}/{token}', 'API\ParticipatorController@join');
 
+
     Route::apiResources([
             'yuedan' => 'API\YueDanController',
             'participator' => 'API\ParticipatorController',
     ]);
 
+
+    Route::get('yuedans', function () {
+        $user = Auth::guard('api')->user();
+        return YueDanResource::collection(\App\YueDan::byParticipator($user['id'])->simplePaginate(5));
+    });
+
+    Route::post('yuedan/uploadimg', 'API\YueDanController@uploadImg');
 });

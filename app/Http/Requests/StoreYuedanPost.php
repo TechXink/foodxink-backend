@@ -25,7 +25,6 @@ class StoreYuedanPost extends FormRequest
     public function rules()
     {
         return [
-            'sponsor_id' => 'bail|required|integer|min:1',
             'title' => 'bail|required|max:255',
             'description' => 'required',
             'close_time' => 'required|integer',
