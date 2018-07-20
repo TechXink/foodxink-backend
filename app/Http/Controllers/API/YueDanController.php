@@ -6,6 +6,7 @@ use App\Http\Requests\StoreYuedanPost;
 use App\YueDan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class YueDanController extends Controller
 {
@@ -19,6 +20,7 @@ class YueDanController extends Controller
     {
         return YueDan::simplePaginate(5);
         //return YueDan::paginate(5);
+
     }
 
     /**
@@ -80,5 +82,15 @@ class YueDanController extends Controller
     public function destroy(YueDan $yueDan)
     {
         //
+    }
+
+    /*
+     * @function：发现更多
+     */
+    public function more(){
+        //return YueDan::simplePaginate(5);
+        //return YueDan::where('create_time','>',DATE_SUB(NOW(),'INTERVAL 1 HOUR'));
+        $yuedanInfo = DB::select(' select id,title,eat_time,latitude,longitude,image from yuedan where create_time > unix_timestamp(DATE_SUB(NOW(),INTERVAL 1 HOUR))');
+        return $yuedanInfo;
     }
 }

@@ -17,9 +17,18 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+
+
 Route::prefix('v1')->group(function () {
+
+    Route::get('yuedan/more', 'API\YueDanController@more');
+    Route::put('participator/join/{id}/{user_id}', 'API\ParticipatorController@join');
+
     Route::apiResources([
             'yuedan' => 'API\YueDanController',
-            'participator' => 'API\ParticipatorController'
+            'participator' => 'API\ParticipatorController',
     ]);
+
 });
