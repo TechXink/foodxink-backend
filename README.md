@@ -288,7 +288,7 @@ file类型
 
 说明：该接口是否赴约
 
-`GET ~/api/v1/participator/join/yuedan_id?api_token={api_token}`
+`PUT ~/api/v1/participator/join/yuedan_id?api_token={api_token}`
 #### 请求参数
 yuedan_id:约单id
 #### 返回说明
