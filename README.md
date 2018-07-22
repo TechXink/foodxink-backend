@@ -236,9 +236,24 @@ file类型
 #### 返回说明
 ```json
 // 成功时返回
-{"status":0,
-"data":[                                              {"id":1,"title":"\u6735\u9890\u6392\u9aa8","eat_time":0,"latitude":"39.989680","longitude":"116.476650","image":"http:\/\/suo.im\/5lIls6"},{"id":2,"title":"\u7709\u5dde\u697c\u793e","eat_time":0,"latitude":"39.990960","longitude":"116.484260","image":"http:\/\/suo.im\/4Z5twK"}
-]
+{
+	"status": 0,
+	"data": [{
+		"id": 1,
+		"title": "\u6735\u9890\u6392\u9aa8",
+		"eat_time": 0,
+		"latitude": "39.989680",
+		"longitude": "116.476650",
+		"image": "http:\/\/suo.im\/5lIls6"
+	},
+	{
+		"id": 2,
+		"title": "\u7709\u5dde\u697c\u793e",
+		"eat_time": 0,
+		"latitude": "39.990960",
+		"longitude": "116.484260",
+		"image": "http:\/\/suo.im\/4Z5twK"
+	}]
 }
 ```
 ### 活动详情
@@ -251,7 +266,23 @@ file类型
 #### 返回说明
 ```json
 // 成功时返回
-{"status":0,"data":{"id":1,"sponsor_id":1,"title":"\u6735\u9890\u6392\u9aa8","description":"\u6682\u65e0\u4fe1\u606f","close_time":0,"eat_time":0,"address":"\u5317\u4eac\u9152\u4ed9\u6865","latitude":"39.989680","longitude":"116.476650","location_name":"","image":null,"create_time":1532269443}}
+{
+	"status": 0,
+	"data": {
+		"id": 1,
+		"sponsor_id": 1,
+		"title": "\u6735\u9890\u6392\u9aa8",
+		"description": "\u6682\u65e0\u4fe1\u606f",
+		"close_time": 0,
+		"eat_time": 0,
+		"address": "\u5317\u4eac\u9152\u4ed9\u6865",
+		"latitude": "39.989680",
+		"longitude": "116.476650",
+		"location_name": "",
+		"image": null,
+		"create_time": 1532269443
+	}
+}
 ```
 ### 赴约
 
