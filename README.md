@@ -260,9 +260,9 @@ file类型
 
 说明：该接口获取的详情
 
-`GET ~/api/v1/yuedan/1?api_token={api_token}`
+`GET ~/api/v1/yuedan/yuedan_id?api_token={api_token}`
 #### 请求参数
-
+yuedan_id:约单id
 #### 返回说明
 ```json
 // 成功时返回
