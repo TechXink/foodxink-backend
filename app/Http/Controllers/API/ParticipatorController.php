@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Requests\StoreParticipator;
 use App\Participator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,9 +27,21 @@ class ParticipatorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreParticipator $request)
     {
-        //
+        //确认跟约
+        $data = $request->all();
+        $data['join_time'] = time();
+        $res = Participator::insert($data);
+        if ($res) {
+            //成功了将数据返回
+            $participator = Participator::where('yuedan_id','=',$yuedan_id)
+                ->get();
+            return response()->json(['data'=>$participator]);
+        } else {
+            return response()->json(['code' => -1, 'message' => '确定跟约失败']);
+        }
+
     }
 
     /**
@@ -37,9 +50,12 @@ class ParticipatorController extends Controller
      * @param  \App\Participator  $participator
      * @return \Illuminate\Http\Response
      */
-    public function show(Participator $participator)
+    public function show($id)
     {
-        //
+        //get方式 跟约人列表（基于某个约单下的跟约者）1为发起者,'2'为跟约人
+        $participator = Participator::where('yuedan_id','=',$id)
+            ->get();
+        return response()->json(['data'=>$participator]);
     }
 
     /**
@@ -60,8 +76,19 @@ class ParticipatorController extends Controller
      * @param  \App\Participator  $participator
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy($id,$user_id)
     {
+        //取消跟约
+        //$data=Participator::find('yuedan_id','=',$id);
+        $res = DB::delete('delete from participator where user_id=?',[$user_id]);
+        if ($res) {
+            //成功了将数据返回
+            $participator = Participator::where('yuedan_id','=',$id)
+                ->get();
+            return response()->json(['data'=>$participator]);
+        } else {
+            return response()->json(['code' => -1, 'message' => '取消跟约失败']);
+        }
 
     }
 
