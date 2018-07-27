@@ -27,8 +27,15 @@ class ParticipatorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreParticipator $request)
+    public function store(StoreParticipator $request,$token)
     {
+        //token验证
+        $user_id = DB::table("users")->where('api_token',$token)->pluck('id')->first();
+
+        if(!$user_id){
+            return ['status'=>1,'message'=>'用户已过期或不存在'];
+        }
+
         //确认跟约
         $data = $request->all();
         $data['join_time'] = time();
@@ -50,8 +57,15 @@ class ParticipatorController extends Controller
      * @param  \App\Participator  $participator
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,$token)
     {
+        //token验证
+        $user_id = DB::table("users")->where('api_token',$token)->pluck('id')->first();
+
+        if(!$user_id){
+            return ['status'=>1,'message'=>'用户已过期或不存在'];
+        }
+
         //get方式 跟约人列表（基于某个约单下的跟约者）1为发起者,'2'为跟约人
         $participator = Participator::where('yuedan_id','=',$id)
             ->get();
@@ -76,8 +90,15 @@ class ParticipatorController extends Controller
      * @param  \App\Participator  $participator
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id,$user_id)
+    public function destroy($id,$user_id,$token)
     {
+        //token验证
+        $user_id = DB::table("users")->where('api_token',$token)->pluck('id')->first();
+
+        if(!$user_id){
+            return ['status'=>1,'message'=>'用户已过期或不存在'];
+        }
+
         //取消跟约
         //$data=Participator::find('yuedan_id','=',$id);
         $res = DB::delete('delete from participator where user_id=?',[$user_id]);
