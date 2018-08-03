@@ -89,7 +89,8 @@ class YueDanController extends Controller
      */
     public function show(YueDan $yueDan, $id)
     {
-        return YueDan::find($id);
+        $data =  YueDan::find($id);
+		return ['status'=>0,'data'=>$data];
         //return response()->json(['id'=>$id]);
     }
 
@@ -124,6 +125,6 @@ class YueDanController extends Controller
         //return YueDan::simplePaginate(5);
         //return YueDan::where('create_time','>',DATE_SUB(NOW(),'INTERVAL 1 HOUR'));
         $yuedanInfo = DB::select(' select id,title,eat_time,latitude,longitude,image from yuedan where create_time > unix_timestamp(DATE_SUB(NOW(),INTERVAL 1 DAY))');
-        return $yuedanInfo;
+        return ['status'=>0,'data'=>$yuedanInfo];
     }
 }
