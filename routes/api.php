@@ -26,7 +26,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 
-Route::prefix('v1')->group(function () {
+Route::prefix('v1')->middleware('auth:api')->group(function () {
 
     Route::get('yuedan/more', 'API\YueDanController@more');
     Route::put('participator/join/{id}/{token}', 'API\ParticipatorController@join');
