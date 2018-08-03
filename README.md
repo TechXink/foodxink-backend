@@ -226,3 +226,81 @@ file类型
     "message": "xxx"
 }
 ```
+### 更多活动
+
+说明：该接口获取一天之内的活动
+
+`GET ~/api/v1/yuedan/more?api_token={api_token}`
+#### 请求参数
+
+#### 返回说明
+```json
+// 成功时返回
+{
+	"status": 0,
+	"data": [{
+		"id": 1,
+		"title": "\u6735\u9890\u6392\u9aa8",
+		"eat_time": 0,
+		"latitude": "39.989680",
+		"longitude": "116.476650",
+		"image": "http:\/\/suo.im\/5lIls6"
+	},
+	{
+		"id": 2,
+		"title": "\u7709\u5dde\u697c\u793e",
+		"eat_time": 0,
+		"latitude": "39.990960",
+		"longitude": "116.484260",
+		"image": "http:\/\/suo.im\/4Z5twK"
+	}]
+}
+```
+### 活动详情
+
+说明：该接口获取的详情
+
+`GET ~/api/v1/yuedan/yuedan_id?api_token={api_token}`
+#### 请求参数
+yuedan_id:约单id
+#### 返回说明
+```json
+// 成功时返回
+{
+	"status": 0,
+	"data": {
+		"id": 1,
+		"sponsor_id": 1,
+		"title": "\u6735\u9890\u6392\u9aa8",
+		"description": "\u6682\u65e0\u4fe1\u606f",
+		"close_time": 0,
+		"eat_time": 0,
+		"address": "\u5317\u4eac\u9152\u4ed9\u6865",
+		"latitude": "39.989680",
+		"longitude": "116.476650",
+		"location_name": "",
+		"image": null,
+		"create_time": 1532269443
+	}
+}
+```
+### 赴约
+
+说明：该接口是否赴约
+
+`PUT ~/api/v1/participator/join/yuedan_id?api_token={api_token}`
+#### 请求参数
+yuedan_id:约单id
+#### 返回说明
+```json
+// 成功时返回
+{
+    "code": 0,
+    "message": "赴约成功"
+}
+//赴约失败`
+{
+    "code": -1,
+    "message": "赴约失败"
+}
+```

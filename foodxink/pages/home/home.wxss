@@ -1,0 +1,264 @@
+/* pages/home/home.wxss */
+@import "icon/style.wxss";
+
+.container {
+  background: #fff;
+}
+
+/*用户信息*/
+
+.userinfo-s {
+  text-align: right;
+  position: absolute;
+  top: 25rpx;
+  right: 35rpx;
+  z-index: 9999;
+}
+
+.userinfo-s .userinfo-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+
+.userinfo-t {
+  position: relative;
+  width: 400rpx;
+  flex-direction: column;
+}
+
+.tips {
+  width: 0rpx;
+  height: 0rpx;
+  border-top: 15rpx solid rgba(0, 0, 0, 0);
+  border-right: 15rpx solid rgba(0, 0, 0, 0);
+  border-bottom: 15rpx solid #333;
+  border-left: 15rpx solid rgba(0, 0, 0, 0);
+  position: absolute;
+  top: -18rpx;
+  right: 28rpx;
+}
+
+.userinfo-t .info {
+  position: absolute;
+  right: -4rpx;
+  top: 6rpx;
+  color: #fff;
+  flex-direction: column;
+}
+
+.userinfo-t .info .item {
+  background: #333;
+  border-bottom: 1rpx solid #fff;
+  font-size: 24rpx;
+  padding: 12rpx;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+}
+
+.userinfo-t .info .item i {
+  font-size: 45rpx;
+  display: inline-block;
+  padding-right: 20rpx;
+  vertical-align: bottom;
+}
+
+.userinfo-t .info .item .userinfo-avatar {
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.userinfo-img {
+  display: inline-block;
+  padding-top: 10rpx;
+}
+
+.userinfo-credit {
+  padding: 0 0 0 10px;
+}
+@import "../../icon/style.wxss";
+
+.userMark {
+  font-size: 22rpx;
+}
+
+.userMark span {
+  display: inline-block;
+  border: 1px solid #fff;
+  border-radius: 19rpx;
+  padding: 2rpx 20rpx;
+}
+
+.userName {
+  padding: 10rpx 0 4rpx 0;
+}
+
+/*约单列表*/
+
+.list {
+  margin-left: 30rpx;
+  padding-left: 30rpx;
+  border-left: 1px solid rgba(219, 219, 219, 1);
+}
+
+.appointment {
+  position: relative;
+}
+
+.title {
+  font-size: 49rpx;
+  padding-top: 32rpx;
+  color: #101010;
+  position: relative;
+}
+
+.appointment-list {
+  padding-top: 24rpx;
+}
+
+.appointment-list  .appointment-item {
+  position: relative;
+  margin-bottom: 50rpx;
+}
+
+.appointment-list .point {
+  display: inline-block;
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 100%;
+  background: rgba(219, 219, 219, 1);
+  position: absolute;
+  left: -38rpx;
+  top: 10rpx;
+}
+
+.appointment-date {
+  font-size: 24rpx;
+  color: #101010;
+}
+
+.appointment-date span {
+  color: #999;
+}
+
+.appointment-info {
+  margin: 20rpx 30rpx 20rpx 0;
+  border-radius: 14rpx;
+  border-color: transparent;
+  box-shadow: 1px 2px 10px 2px rgba(170, 170, 170, 0.21);
+}
+
+.appointment-info .time-wrap {
+  height: 168rpx;
+  color: #fff;
+  font-size: 24rpx;
+  border-radius: 14rpx 14rpx 0 0;
+  background-attachment: fixed;
+  position: relative;
+  overflow:hidden;
+}
+
+.appointment-info .time-wrap image{
+  position: absolute;
+  width: 100%
+}
+
+.appointment-info .time {
+  padding: 56rpx 0 0 20rpx;
+  position: absolute;
+}
+
+
+.appointment-info .time span {
+  font-size: 49rpx;
+  display: block;
+}
+
+.appointment-info .addr {
+  font-size: 24rpx;
+  color: #999;
+  padding: 30rpx 20rpx;
+}
+
+.appointment-info .addr span {
+  color: #101010;
+  display: block;
+  padding-top: 5rpx;
+}
+
+.more {
+  padding: 30rpx 0 50rpx 0;
+}
+
+.scroll-header {
+  display: flex;
+  white-space: nowrap;
+  height: 350rpx;
+}
+
+.scroll-header .scroll-view-item {
+  margin: 30rpx 50rpx 10rpx 0rpx;
+  width: 500rpx;
+  display: inline-block;
+  border: 1px solid rgba(170, 170, 170, 0.21);
+  box-shadow: 1px 2px 10px 2px rgba(170, 170, 170, 0.21);
+  border-radius: 8px;
+  padding: 10rpx 20rpx;
+}
+
+.addrInfo-item {
+  display: flex;
+  font-size: 22rpx;
+  padding: 12rpx 0;
+  height: 120rpx;
+}
+
+.addrInfo-item image {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.addrInfo-img {
+  padding: 0 20rpx 0 0;
+}
+
+.addrInfo-tips {
+  width: 200rpx;
+}
+
+.addrInfo-tips .addrInfo-res {
+  font-size: 30rpx;
+}
+
+.addrInfo-tips .addrInfo-time {
+  color: #999;
+  padding: 8rpx 0;
+}
+
+.addrInfo-tips .addrInfo-gps {
+  color: rgba(255, 85, 57, 1);
+}
+
+.addrInfo-tips .addrInfo-gps i {
+  color: #999;
+}
+
+.addrInfo-btn navigator {
+  padding: 8rpx 30rpx;
+  border-radius: 20px;
+  font-size: 24rpx;
+  color: #fff;
+  background: rgba(255, 0, 120, 1);
+  margin: 32rpx 0 0 45rpx;
+}
+
+.addNew {
+  position: fixed;
+  color: rgba(255, 0, 120, 1);
+  bottom: 26rpx;
+  right: 18rpx;
+  font-size: 80rpx;
+  background: #fff;
+  border-radius: 55%;
+}

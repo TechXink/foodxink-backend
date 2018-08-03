@@ -1,0 +1,97 @@
+<!--pages/home/home.wxml-->
+<view class="container">
+
+
+
+  <view class='list'>
+    <!-- 约单列表 -->
+    <view class="section appointment">
+      <view class="title">
+        我的约单
+        <!-- 用户信息 -->
+        <view class="userinfo-s">
+          <image bindtap="showUserInfo" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+          <view wx:if="{{openUserInfo}}" class="userinfo-t">
+            <view class="tips"></view>
+            <view class="info">
+              <view class='item'>
+                <view class="userinfo-img">
+                  <image bindtap="" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+                </view>
+                <view class='userinfo-credit'>
+                  <view class='userName'>{{userInfo.nickName}}</view>
+                  <view class="userMark">吃信分：
+                    <span>200</span> 分</view>
+                </view>
+              </view>
+              <view class='item'>
+                <i class="icon-history"></i> 历史约单</view>
+              <view class='item'>
+                <i class="icon-switch"></i>退出</view>
+            </view>
+          </view>
+        </view>
+
+      </view>
+      <view class="appointment-list">
+        <view class="appointment-item" wx:key="txt" wx:for="{{appointlist}}">
+          <navigator url="{{item.href}}">
+            <view>
+              <span class="point"></span>
+              <view class="appointment-date">{{item.time.date}}
+                <span>{{item.time.week}}</span>
+              </view>
+              <view class="appointment-info">
+                <view class="time-wrap">
+                  <image src="{{item.img}}"></image>
+                  <view class="time">时间
+                    <span>{{item.time.hour}}</span>
+                  </view>
+                </view>
+                <view class="addr">
+                  <p>地点:
+                    <span>{{item.location.address}}</span>
+                  </p>
+                </view>
+              </view>
+
+            </view>
+          </navigator>
+        </view>
+      </view>
+    </view>
+
+    <!-- 发现更多 -->
+
+    <view class="more">
+      <view class="title">发现更多</view>
+      <scroll-view scroll-x class="scroll-header">
+        <view wx:key="unique" class="scroll-view-item" wx:for="{{recommendList}}" wx:for-index="i">
+          <view wx:key="shop" wx:for="{{recommendList[i]}}" class='addrInfo-item' style="flex-direction:row;">
+            <view class="addrInfo-img">
+              <image src="{{item.img}}"></image>
+            </view>
+            <view class="addrInfo-tips">
+              <view class="addrInfo-res">{{item.res}}</view>
+              <view class='addrInfo-time'>{{item.time.date}} {{item.time.hour}}</view>
+              <view class='addrInfo-gps'>
+                <i class=".icon-location"></i> 距离悠乐汇{{item.gps}}m</view>
+            </view>
+            <view class="addrInfo-btn">
+              <navigator url="{{item.href}}">查看</navigator>
+            </view>
+          </view>
+        </view>
+
+      </scroll-view>
+    </view>
+
+  </view>
+
+  <view class="addNew">
+    <navigator url="../logs/logs">
+      <view class="iconfont icon-add"></view>
+    </navigator>
+  </view>
+
+</view>
