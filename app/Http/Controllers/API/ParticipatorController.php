@@ -120,9 +120,10 @@ class ParticipatorController extends Controller
      * @param  $user_id 用户id
      * @return bool
      */
-    public function join($id,$token)
+    public function join($id)
     {
         //Participator::updated(['is_join'=>1]);
+		$token = isset($_GET['api_token'])?$_GET['api_token']:'';
         $user_id = DB::table("users")->where('api_token',$token)->pluck('id')->first();
 
         if(!$user_id){
