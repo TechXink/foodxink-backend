@@ -2,7 +2,7 @@
 **Introduce and api document**
 ### 微信第三方（开发者服务器）登录
 说明：把`login`得到的`code`和`getUserInfo`得到的数据合并一起发给第三方服务器，取得token
-开发者服务器以`code`换取 用户唯一标识`openid` 和 会话密钥session_key。
+开发者服务器以`code`换取 用户唯一标识`openid` 和 会话密钥`session_key`。
 校验通过会返回后续鉴权需要的`api_token`
 
 注意：**前端得到api_token需要保存上，供后续请求使用**
