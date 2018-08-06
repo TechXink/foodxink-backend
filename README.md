@@ -306,65 +306,64 @@ yuedan_id:约单id
     "message": "赴约失败"
 }
 ```
-### 前端需要根据返回的join_role值处理
- ####   值为1：发起者；值为2：跟约者
+### 前端需要根据返回的join_role值处理   值为1：发起者；值为2：跟约者
 
-### 显示跟约列表API:
+#### 显示跟约列表API:
 'GET ~/api/v1/participator/api_token={api_token}'
 #### 请求参数
 只需要api_token
-// 成功时返回json数据：
 ```
+// 成功时返回json数据：
 {
 "data":[
-		{
-		"id":6,
-		"yuedan_id":1,
-		"user_id":4,
-		"join_role":1,
-		"avatar_url":"images\/defalut.jpg",
-		"join_time":1532500071,
-		"name":"\u6a31\u6843\u5c0f\u4e38\u5b50"
-		},
-		{
-		"id":7,
-		"yuedan_id":1,
-		"user_id":4,
-		"join_role":2,
-		"avatar_url":"images\/defalut.jpg",
-		"join_time":1532500077,
-		"name":"\u6a31\u6843\u5c0f\u4e38\u5b50"
-		}
-	]
+	{
+	"id":6,
+	"yuedan_id":1,
+	"user_id":4,
+	"join_role":1,
+	"avatar_url":"images\/defalut.jpg",
+	"join_time":1532500071,
+	"name":"\u6a31\u6843\u5c0f\u4e38\u5b50"
+	},
+	{
+	"id":7,
+	"yuedan_id":1,
+	"user_id":4,
+	"join_role":2,
+	"avatar_url":"images\/defalut.jpg",
+	"join_time":1532500077,
+	"name":"\u6a31\u6843\u5c0f\u4e38\u5b50"
+	}
+]
 }
 ```
-### 确认跟约API:
+#### 确认跟约API:
 'POST~/api/v1/participator/yuedan_id?api_token={api_token}'
 #### 请求参数
 yuedan_id:约单id
-// 成功时返回json数据：
 ```
+// 成功时返回json数据：
 {
 "data":[
-		{
-		"id":6,
-		"yuedan_id":1,
-		"user_id":4,
-		"join_role":2,
-		"avatar_url":"images\/defalut.jpg",
-		"join_time":1532500071,
-		"name":"\u6a31\u6843\u5c0f\u4e38\u5b50"
-		},
-		{
-		"id":7,
-		"yuedan_id":1,
-		"user_id":4,
-		"join_role":2,
-		"avatar_url":"images\/defalut.jpg",
-		"join_time":1532500077,
-		"name":"\u6a31\u6843\u5c0f\u4e38\u5b50"
-		}
-	]
+	{
+	"id":6,
+	"yuedan_id":1,
+	"user_id":4,
+	"join_role":2,
+	"avatar_url":"images\/defalut.jpg",
+	"join_time":1532500071,
+	"name":"\u6a31\u6843\u5c0f\u4e38\u5b50"
+	},
+	{
+	"id":7,
+	"yuedan_id":1,
+	"user_id":4,
+	"join_role":2,
+	"avatar_url":"images\/defalut.jpg",
+	"join_time":1532500077,
+	"name":"\u6a31\u6843\u5c0f\u4e38\u5b50"
+	}
+]
 }
 确定跟约失败
 {
@@ -373,33 +372,33 @@ yuedan_id:约单id
 }
 ```
 
-### 取消跟约API:
+#### 取消跟约API:
 'DELETE~/api/v1/participator/yuedan_id?api_token={api_token}'
 #### 请求参数
 yuedan_id:约单id
-// 成功时返回json数据：
 ```
+// 成功时返回json数据：
 {
 "data":[
-		{
-		"id":6,
-		"yuedan_id":1,
-		"user_id":4,
-		"join_role":2,
-		"avatar_url":"images\/defalut.jpg",
-		"join_time":1532500071,
-		"name":"\u6a31\u6843\u5c0f\u4e38\u5b50"
-		},
-		{
-		"id":7,
-		"yuedan_id":1,
-		"user_id":4,
-		"join_role":2,
-		"avatar_url":"images\/defalut.jpg",
-		"join_time":1532500077,
-		"name":"\u6a31\u6843\u5c0f\u4e38\u5b50"
-		}
-	]
+	{
+	"id":6,
+	"yuedan_id":1,
+	"user_id":4,
+	"join_role":2,
+	"avatar_url":"images\/defalut.jpg",
+	"join_time":1532500071,
+	"name":"\u6a31\u6843\u5c0f\u4e38\u5b50"
+	},
+	{
+	"id":7,
+	"yuedan_id":1,
+	"user_id":4,
+	"join_role":2,
+	"avatar_url":"images\/defalut.jpg",
+	"join_time":1532500077,
+	"name":"\u6a31\u6843\u5c0f\u4e38\u5b50"
+	}
+]
 }
 取消跟约失败
 {
