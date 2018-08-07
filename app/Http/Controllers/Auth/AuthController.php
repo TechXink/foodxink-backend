@@ -81,6 +81,8 @@ class AuthController extends Controller
             $userInfo['openid'] = $data['openid'];
             $userInfo['api_token'] = sha1($signature);
             $userInfo['nickname'] = $userInfo['nickName'];
+            $userInfo['sex'] = $userInfo['gender'];
+            $userInfo['headimgurl'] = $userInfo['avatarUrl'];
             try {
 
                 User::create($userInfo);

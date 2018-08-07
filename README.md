@@ -6,6 +6,7 @@
 校验通过会返回后续鉴权需要的`api_token`
 
 注意：**前端得到api_token需要保存上，供后续请求使用**
+统一域名`http://117.50.43.67/`
 
 `POST ~/api/auth/oauth`
 
@@ -61,7 +62,7 @@ var js_code
               res.js_code = js_code
               // 把login得到的code和getUserInfo得到的数据合并一起发给第三方服务器，取得token
               wx.request({
-                url: `http://foodxink.com/api/auth/oauth`,
+                url: `http://117.50.43.67/api/auth/oauth`,
                 method: 'POST',
                 data: res,
                 success: function (res) {
@@ -97,11 +98,13 @@ var js_code
       }
     })
 ```
-### 我的约单
+### 我的约单和历史约单
 
 说明：返回列表是该用户自己发起的和参与的约单
 
-`GET ~/api/v1/yuedans?api_token={api_token}`
+我的约单`GET ~/api/v1/yuedans?api_token={api_token}`
+历史约单`GET ~/api/v1/yuedan-history?api_token={api_token}`
+
 #### 请求参数
 只需要`api_token`
 
