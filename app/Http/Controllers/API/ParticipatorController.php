@@ -72,9 +72,10 @@ class ParticipatorController extends Controller
      * @param  $user_id 用户id
      * @return bool
      */
-    public function join($id,$token)
+    public function join($id)
     {
         //Participator::updated(['is_join'=>1]);
+        $token = isset($_GET['api_token'])?$_GET['api_token']:'';
         $user_id = DB::table("users")->where('api_token',$token)->pluck('id')->first();
 
         if(!$user_id){
@@ -83,9 +84,9 @@ class ParticipatorController extends Controller
 
         $bool = DB::table("Participator")->where(['yuedan_id'=>$id,'user_id'=>$user_id])->update(['is_join'=>1]);
         if($bool || empty($bool)){
-            return ['status'=>0,'message'=>'赴约成功'];
+            return ['code'=>0,'message'=>'赴约成功'];
         }else{
-            return ['status'=>1,'message'=>'赴约失败'];
+            return ['code'=>1,'message'=>'赴约失败'];
         }
     }
 }

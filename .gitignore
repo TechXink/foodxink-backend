@@ -13,3 +13,6 @@ yarn-error.log
 .env
 # Mac DS_Store Files
 .DS_Store
+_ide_helper.php
+_ide_helper_models.php
+.phpstorm.meta.php
