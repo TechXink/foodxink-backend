@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\StoreYuedanPost;
 use App\Participator;
+use App\User;
 use App\YueDan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -124,9 +125,20 @@ class YueDanController extends Controller
      */
     public function more(){
 
-        //return YueDan::simplePaginate(5);
-        //return YueDan::where('create_time','>',DATE_SUB(NOW(),'INTERVAL 1 HOUR'));
-        $yuedanInfo = DB::select(' select id,title,eat_time,latitude,longitude,image from yuedan where create_time > unix_timestamp(DATE_SUB(NOW(),INTERVAL 1 DAY))');
+        //$yuedanInfo = DB::select(' select id,title,eat_time,latitude,longitude,image from yuedan where create_time > unix_timestamp(DATE_SUB(NOW(),INTERVAL 1 DAY))');
+
+        $api_token = isset($_GET['api_token'])?$_GET['api_token']:trim($_GET['api_token']);
+        $userInfo = User::where('api_token','=',$api_token)->first()->toArray();
+        if(empty($userInfo)){
+            return ['status'=>1,'data'=>'用户不存在'];
+        }
+
+        $sponsor_id = '';
+        $yuedanInfo = YueDan::where('create_time','>','unix_timestamp(DATE_SUB(NOW(),INTERVAL 1 DAY)')->where('sponsor_id','<>',$userInfo['id'])->get()->toArray();
+
+        foreach ($yuedanInfo as $key=>$value){
+            $yuedanInfo[$key]['image'] = isset($value['image'][0])?$value['image'][0]:'';
+        }
         return ['status'=>0,'data'=>$yuedanInfo];
     }
 }
