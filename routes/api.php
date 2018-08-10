@@ -26,7 +26,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 
-Route::prefix('v1')->group(function () {
+Route::prefix('v1')->middleware('auth:api')->group(function () {
 
     Route::get('yuedan/more', 'API\YueDanController@more');
     Route::put('participator/join/{id}', 'API\ParticipatorController@join');
@@ -40,7 +40,12 @@ Route::prefix('v1')->group(function () {
 
     Route::get('yuedans', function () {
         $user = Auth::guard('api')->user();
-        return YueDanResource::collection(\App\YueDan::byParticipator($user['id'])->simplePaginate(5));
+        return YueDanResource::collection(\App\YueDan::byParticipator($user['id'], '>')->simplePaginate(5));
+    });
+
+    Route::get('yuedan-history', function () {
+        $user = Auth::guard('api')->user();
+        return YueDanResource::collection(\App\YueDan::byParticipator($user['id'], '<=')->simplePaginate(5));
     });
 
     Route::post('yuedan/uploadimg', 'API\YueDanController@uploadImg');

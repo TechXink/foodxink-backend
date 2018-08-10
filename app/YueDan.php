@@ -29,13 +29,14 @@ class YueDan extends Model
         'image' => 'array',
     ];
 
-    public static function byParticipator($sponsor_id)
+    public static function byParticipator($sponsor_id, $operator)
     {
         // return $this->hasMany('App\Participator', 'yuedan_id', 'id');
 
 
-        return YueDan::groupBy(['yuedan.id'])->select(['sponsor_id','title','description','close_time',
+        return YueDan::groupBy(['yuedan.id'])->select(['yuedan.id','sponsor_id','title','description','close_time',
             'eat_time','address','latitude','longitude','location_name','image'])->where('sponsor_id', $sponsor_id)
+            ->where('close_time', $operator, time())
         ->join('participator', 'sponsor_id', '=', 'user_id')
         ;//->get();
     }

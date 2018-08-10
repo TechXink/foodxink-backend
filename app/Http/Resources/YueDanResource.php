@@ -25,6 +25,7 @@ class YueDanResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'yuedan_id' => $this->id,
             'title' => $this->title,
             'time' => [
                 'date' => date('Y/m/d', $this->eat_time),
