@@ -111,6 +111,9 @@ class ParticipatorController extends Controller
         }elseif ((isset($join_role) || !empty($join_role)) && $join_role == 1){
             $is_genyue=0;
             $is_sponsor=1;
+        }else{
+            $is_genyue=0;
+            $is_sponsor=0;
         }
         //get方式 跟约人列表（基于某个约单下的跟约者）1为发起者,'2'为跟约人
         $sponsor = Participator::where('yuedan_id','=',$id)->where('join_role',1)->get();
