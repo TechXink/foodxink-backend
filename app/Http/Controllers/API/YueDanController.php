@@ -90,7 +90,10 @@ class YueDanController extends Controller
      */
     public function show(YueDan $yueDan, $id)
     {
-        $data =  YueDan::find($id);
+        $data =  YueDan::where(['id'=>$id])->first()->toArray();
+        $data['time']['date'] = isset($data['eat_time'])?date("Y-m-d",$data['eat_time']):'';
+        $data['time']['hour'] = isset($data['eat_time'])?date("H:i:s",$data['eat_time']):'';
+
         return ['status'=>0,'data'=>$data];
 
         //return response()->json(['id'=>$id]);
