@@ -28,7 +28,7 @@ class ParticipatorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreParticipator $request,$id)
+    public function store(Request $request)
     {
         //token验证
         $token = isset($_GET['api_token'])?$_GET['api_token']:'';
@@ -37,13 +37,15 @@ class ParticipatorController extends Controller
         if(!$user_id){
             return ['status'=>1,'message'=>'用户已过期或不存在'];
         }
-
+        $id = $request->input('yuedan_id');
+        $data['yuedan_id'] = $id;
         //跟约角色默认为2
         $data['join_role']=2;
         $data['user_id']=$user_id;
         $data['join_time'] = time();
         //根据约单id查头像分组
-        $avatar_group = YueDan::where('id','=',$id)->select('avatar_group')->get();
+        $avatar_group = DB::table("yuedan")->where('id','=',$id)->pluck('avatar_group')->first();
+
         //查分组
         $group = Participator::getAvatarGroup($avatar_group);
         //随机生成头像
@@ -54,8 +56,27 @@ class ParticipatorController extends Controller
         $res = Participator::insert($data);
         if ($res) {
             //成功了将数据返回
+            //get方式 跟约人列表（基于某个约单下的跟约者）1为发起者,'2'为跟约人
             $sponsor = Participator::where('yuedan_id','=',$id)->where('join_role',1)->get();
+            foreach ($sponsor as $key=>$v){
+                $time['data']=date("Y/m/d",$v['join_time']);
+                $w=date("w",$v['join_time']);
+                $weekArr=array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+                $time['week'] = $weekArr[$w];
+                $time['hour']=date("h:i",$v['join_time']);
+                $v['join_time']=$time;
+            }
+
             $genyue = Participator::where('yuedan_id','=',$id)->where('join_role',2)->get();
+            foreach ($genyue as $key=>$v){
+                $time['data']=date("Y/m/d",$v['join_time']);
+                $w=date("w",$v['join_time']);
+                $weekArr=array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+                $time['week'] = $weekArr[$w];
+                $time['hour']=date("h:i",$v['join_time']);
+                $v['join_time']=$time;
+            }
+
             return response()->json(['sponsor'=>$sponsor,'genyue'=>$genyue]);
         } else {
             return response()->json(['code' => -1, 'message' => '确定跟约失败']);
@@ -79,10 +100,40 @@ class ParticipatorController extends Controller
         if(!$user_id){
             return ['status'=>1,'message'=>'用户已过期或不存在'];
         }
+
+        //根据user_id和yuedan_id判断当前这个人否为发起者
+        $join_role=DB::table("participator")->where('yuedan_id','=',$id)->where('user_id','=',$user_id)->pluck('join_role')->first();
+
+        //如果不是发起者,则判断是否跟约
+        if ((isset($join_role) || !empty($join_role)) && $join_role != 1){
+            $is_genyue=1;//1为已跟约
+            $is_sponsor=0;//1为是发起者
+        }elseif ((isset($join_role) || !empty($join_role)) && $join_role == 1){
+            $is_genyue=0;
+            $is_sponsor=1;
+        }
         //get方式 跟约人列表（基于某个约单下的跟约者）1为发起者,'2'为跟约人
         $sponsor = Participator::where('yuedan_id','=',$id)->where('join_role',1)->get();
+        foreach ($sponsor as $key=>$v){
+            $time['data']=date("Y/m/d",$v['join_time']);
+            $w=date("w",$v['join_time']);
+            $weekArr=array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+            $time['week'] = $weekArr[$w];
+            $time['hour']=date("h:i",$v['join_time']);
+            $v['join_time']=$time;
+        }
+
         $genyue = Participator::where('yuedan_id','=',$id)->where('join_role',2)->get();
-        return response()->json(['sponsor'=>$sponsor,'genyue'=>$genyue]);
+        foreach ($genyue as $key=>$v){
+            $time['data']=date("Y/m/d",$v['join_time']);
+            $w=date("w",$v['join_time']);
+            $weekArr=array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+            $time['week'] = $weekArr[$w];
+            $time['hour']=date("h:i",$v['join_time']);
+            $v['join_time']=$time;
+        }
+
+        return response()->json(['sponsor'=>$sponsor,'genyue'=>$genyue,'is_genyue'=>$is_genyue,'is_sponsor'=>$is_sponsor]);
     }
 
     /**
@@ -117,8 +168,27 @@ class ParticipatorController extends Controller
         $res = DB::delete('delete from participator where user_id=?',[$user_id]);
         if ($res) {
             //成功了将数据返回
+            //get方式 跟约人列表（基于某个约单下的跟约者）1为发起者,'2'为跟约人
             $sponsor = Participator::where('yuedan_id','=',$id)->where('join_role',1)->get();
+            foreach ($sponsor as $key=>$v){
+                $time['data']=date("Y/m/d",$v['join_time']);
+                $w=date("w",$v['join_time']);
+                $weekArr=array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+                $time['week'] = $weekArr[$w];
+                $time['hour']=date("h:i",$v['join_time']);
+                $v['join_time']=$time;
+            }
+
             $genyue = Participator::where('yuedan_id','=',$id)->where('join_role',2)->get();
+            foreach ($genyue as $key=>$v){
+                $time['data']=date("Y/m/d",$v['join_time']);
+                $w=date("w",$v['join_time']);
+                $weekArr=array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+                $time['week'] = $weekArr[$w];
+                $time['hour']=date("h:i",$v['join_time']);
+                $v['join_time']=$time;
+            }
+
             return response()->json(['sponsor'=>$sponsor,'genyue'=>$genyue]);
         } else {
             return response()->json(['code' => -1, 'message' => '取消跟约失败']);
