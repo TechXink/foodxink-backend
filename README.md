@@ -317,55 +317,76 @@ yuedan_id:约单id
 yuedan_id:约单id
 ```
 // 成功时返回json数据：
+//$is_genyue 1为已跟约，0为未跟约       $is_sponsor  1为是发起者，0为跟约者；
 {
 "sponsor":[
-    {               
-    "id":9,
-    "yuedan_id":2,
-    "user_id":4,
-    "join_role":1,
-    "avatar_url":"images\/defalut.jpg",
-    "join_time":1532500200,
-    "name":"\u6a31\u6843\u5c0f\u4e38\u5b50"
-    }],
-"genyue":[
     {
-    "id":5,
-    "yuedan_id":2,
-    "user_id":3,
+    "id":31,
+    "yuedan_id":31,
+    "user_id":2,
+    "join_role":1,
+    "avatar_url":"/images/animal-fruit/11.jpg",
+    "join_time":{
+        "data":"2018/08/13",
+        "week":"星期一",
+        "hour":"06:17"
+        },
+    "is_join":0,
+    "name":"kobe"
+    }],
+"genyue":[{
+    "id":36,
+    "yuedan_id":31,
+    "user_id":2,
     "join_role":2,
-    "avatar_url":"images\/defalut.jpg",
-    "join_time":1532051317,
-    "name":"\u6a31\u6843\u5c0f\u4e38\u5b50"
-    }]
+    "avatar_url":"/images/animal-fruit/23.jpg",
+    "join_time":{
+        "data":"2018/08/14",
+        "week":"星期二",
+        "hour":"06:04"
+        },
+    "is_join":0,
+    "name":"bruce lee"
+    }]，
+"is_genyue":0,
+"is_sponsor":1
 }
 ```
 #### 确认跟约API:
-'POST~/api/v1/participator/yuedan_id?api_token={api_token}'
+'POST~/api/v1/participator?api_token={api_token}'
 #### 请求参数
 yuedan_id:约单id
 ```
 // 成功时返回json数据：
 {
 "sponsor":[
-    {               
-    "id":9,
-    "yuedan_id":2,
-    "user_id":4,
-    "join_role":1,
-    "avatar_url":"images\/defalut.jpg",
-    "join_time":1532500200,
-    "name":"\u6a31\u6843\u5c0f\u4e38\u5b50"
-    }],
-"genyue":[
     {
-    "id":5,
-    "yuedan_id":2,
-    "user_id":3,
+    "id":31,
+    "yuedan_id":31,
+    "user_id":2,
+    "join_role":1,
+    "avatar_url":"/images/animal-fruit/11.jpg",
+    "join_time":{
+        "data":"2018/08/13",
+        "week":"星期一",
+        "hour":"06:17"
+        },
+    "is_join":0,
+    "name":"kobe"
+    }],
+"genyue":[{
+    "id":36,
+    "yuedan_id":31,
+    "user_id":2,
     "join_role":2,
-    "avatar_url":"images\/defalut.jpg",
-    "join_time":1532051317,
-    "name":"\u6a31\u6843\u5c0f\u4e38\u5b50"
+    "avatar_url":"/images/animal-fruit/23.jpg",
+    "join_time":{
+        "data":"2018/08/14",
+        "week":"星期二",
+        "hour":"06:04"
+        },
+    "is_join":0,
+    "name":"bruce lee"
     }]
 }
 确定跟约失败
@@ -383,24 +404,33 @@ yuedan_id:约单id
 // 成功时返回json数据：
 {
 "sponsor":[
-    {               
-    "id":9,
-    "yuedan_id":2,
-    "user_id":4,
-    "join_role":1,
-    "avatar_url":"images\/defalut.jpg",
-    "join_time":1532500200,
-    "name":"\u6a31\u6843\u5c0f\u4e38\u5b50"
-    }],
-"genyue":[
     {
-    "id":5,
-    "yuedan_id":2,
-    "user_id":3,
+    "id":31,
+    "yuedan_id":31,
+    "user_id":2,
+    "join_role":1,
+    "avatar_url":"/images/animal-fruit/11.jpg",
+    "join_time":{
+        "data":"2018/08/13",
+        "week":"星期一",
+        "hour":"06:17"
+        },
+    "is_join":0,
+    "name":"kobe"
+    }],
+"genyue":[{
+    "id":36,
+    "yuedan_id":31,
+    "user_id":2,
     "join_role":2,
-    "avatar_url":"images\/defalut.jpg",
-    "join_time":1532051317,
-    "name":"\u6a31\u6843\u5c0f\u4e38\u5b50"
+    "avatar_url":"/images/animal-fruit/23.jpg",
+    "join_time":{
+        "data":"2018/08/14",
+        "week":"星期二",
+        "hour":"06:04"
+        },
+    "is_join":0,
+    "name":"bruce lee"
     }]
 }
 取消跟约失败
