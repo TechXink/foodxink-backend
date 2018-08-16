@@ -38,6 +38,12 @@ class ParticipatorController extends Controller
             return ['status'=>1,'message'=>'用户已过期或不存在'];
         }
         $id = $request->input('yuedan_id');
+
+        //判断用户是否已经跟约
+        $submit = Participator::where('yuedan_id','=',$id)->where('user_id',"=",$user_id)->get();
+        if ($submit){
+            return ['status'=>1,'message'=>'该用户已跟约,不能重复跟约'];
+        }
         $data['yuedan_id'] = $id;
         //跟约角色默认为2
         $data['join_role']=2;
@@ -54,6 +60,7 @@ class ParticipatorController extends Controller
         $data['name'] = Participator::getRandName();
         //确认跟约
         $res = Participator::insert($data);
+
         if ($res) {
             //成功了将数据返回
             //get方式 跟约人列表（基于某个约单下的跟约者）1为发起者,'2'为跟约人
