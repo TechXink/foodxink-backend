@@ -357,6 +357,11 @@ yuedan_id:约单id
 #### 请求参数
 yuedan_id:约单id
 ```
+//如果用户已存在，不能重复跟约返回数据
+{
+    "status":1,
+    "message":"该用户已跟约,不能重复跟约"
+    }
 // 成功时返回json数据：
 {
 "sponsor":[
