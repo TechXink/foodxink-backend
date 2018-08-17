@@ -41,7 +41,10 @@ class ParticipatorController extends Controller
 
         //判断用户是否已经跟约
         $submit = Participator::where('yuedan_id','=',$id)->where('user_id',"=",$user_id)->get();
-        if ($submit){
+        //需要将json数据转换判断，不能直接判断
+        $cunzai=json_decode($submit);
+
+        if ($cunzai){
             return ['status'=>1,'message'=>'该用户已跟约,不能重复跟约'];
         }
         $data['yuedan_id'] = $id;
