@@ -92,8 +92,10 @@ class ParticipatorController extends Controller
                 $v['time']=$time;
                 $v['real_information']=User::where('id','=',$user_id)->select(['id','nickname','headimgurl'])->first();
             }
-//            var_dump($real_information);die;
-            return response()->json(['sponsor'=>$sponsor,'genyue'=>$genyue]);
+            $is_genyue=1;//1为已跟约
+            $is_sponsor=0;//1为是发起者
+
+            return response()->json(['sponsor'=>$sponsor,'genyue'=>$genyue,'is_genyue'=>$is_genyue,'is_sponsor'=>$is_sponsor]);
         } else {
             return response()->json(['code' => -1, 'message' => '确定跟约失败']);
         }
@@ -207,8 +209,10 @@ class ParticipatorController extends Controller
                 $time['hour']=date("h:i",$v['join_time']);
                 $v['time']=$time;
             }
+            $is_genyue=0;//1为已跟约
+            $is_sponsor=0;//1为是发起者
 
-            return response()->json(['sponsor'=>$sponsor,'genyue'=>$genyue]);
+            return response()->json(['sponsor'=>$sponsor,'genyue'=>$genyue,'is_genyue'=>$is_genyue,'is_sponsor'=>$is_sponsor]);
         } else {
             return response()->json(['code' => -1, 'message' => '取消跟约失败']);
         }
