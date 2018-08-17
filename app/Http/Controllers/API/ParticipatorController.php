@@ -139,7 +139,7 @@ class ParticipatorController extends Controller
             $weekArr=array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
             $time['week'] = $weekArr[$w];
             $time['hour']=date("h:i",$v['join_time']);
-            $v['join_time']=$time;
+            $v['time']=$time;
         }
 
         $genyue = Participator::where('yuedan_id','=',$id)->where('join_role',2)->get();
@@ -149,7 +149,7 @@ class ParticipatorController extends Controller
             $weekArr=array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
             $time['week'] = $weekArr[$w];
             $time['hour']=date("h:i",$v['join_time']);
-            $v['join_time']=$time;
+            $v['time']=$time;
         }
 
         return response()->json(['sponsor'=>$sponsor,'genyue'=>$genyue,'is_genyue'=>$is_genyue,'is_sponsor'=>$is_sponsor]);
@@ -195,7 +195,7 @@ class ParticipatorController extends Controller
                 $weekArr=array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
                 $time['week'] = $weekArr[$w];
                 $time['hour']=date("h:i",$v['join_time']);
-                $v['join_time']=$time;
+                $v['time']=$time;
             }
 
             $genyue = Participator::where('yuedan_id','=',$id)->where('join_role',2)->get();
@@ -205,7 +205,7 @@ class ParticipatorController extends Controller
                 $weekArr=array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
                 $time['week'] = $weekArr[$w];
                 $time['hour']=date("h:i",$v['join_time']);
-                $v['join_time']=$time;
+                $v['time']=$time;
             }
 
             return response()->json(['sponsor'=>$sponsor,'genyue'=>$genyue]);
