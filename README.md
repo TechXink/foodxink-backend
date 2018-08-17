@@ -326,11 +326,12 @@ yuedan_id:约单id
     "user_id":2,
     "join_role":1,
     "avatar_url":"/images/animal-fruit/11.jpg",
-    "join_time":{
+    "time":{
         "data":"2018/08/13",
         "week":"星期一",
         "hour":"06:17"
         },
+    "join_time":1534141072,
     "is_join":0,
     "name":"kobe"
     }],
@@ -340,11 +341,12 @@ yuedan_id:约单id
     "user_id":2,
     "join_role":2,
     "avatar_url":"/images/animal-fruit/23.jpg",
-    "join_time":{
+    "time":{
         "data":"2018/08/14",
         "week":"星期二",
         "hour":"06:04"
         },
+    "join_time":1534141072,
     "is_join":0,
     "name":"bruce lee"
     }]，
@@ -371,13 +373,20 @@ yuedan_id:约单id
     "user_id":2,
     "join_role":1,
     "avatar_url":"/images/animal-fruit/11.jpg",
-    "join_time":{
+    "time":{
         "data":"2018/08/13",
         "week":"星期一",
         "hour":"06:17"
         },
+    "join_time":1534141072,
     "is_join":0,
-    "name":"kobe"
+    "name":"kobe",
+    //跟约人的真实信息
+    "real_information": {
+        "id":6,
+        "nickname":"\u4f60\u957f\u4e0d\u9ad8",                  
+        "headimgurl":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/d4LpPvJdDaRyjWpXhSic7WPEcp0ltBHP57N3sUK8vFn4r49tHPj0D3Pdczv09pfIdDjFFYCOCIp0PLhrQXibm4hw\/132"
+        }
     }],
 "genyue":[{
     "id":36,
@@ -385,13 +394,20 @@ yuedan_id:约单id
     "user_id":2,
     "join_role":2,
     "avatar_url":"/images/animal-fruit/23.jpg",
-    "join_time":{
+    "time":{
         "data":"2018/08/14",
         "week":"星期二",
         "hour":"06:04"
         },
+    "join_time":1534141072,
     "is_join":0,
-    "name":"bruce lee"
+    "name":"bruce lee",
+    //跟约人的真实信息
+    "real_information": {
+        "id":6,
+        "nickname":"\u4f60\u957f\u4e0d\u9ad8",                  
+        "headimgurl":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/d4LpPvJdDaRyjWpXhSic7WPEcp0ltBHP57N3sUK8vFn4r49tHPj0D3Pdczv09pfIdDjFFYCOCIp0PLhrQXibm4hw\/132"
+        }
     }]
 }
 确定跟约失败
@@ -415,11 +431,12 @@ yuedan_id:约单id
     "user_id":2,
     "join_role":1,
     "avatar_url":"/images/animal-fruit/11.jpg",
-    "join_time":{
+    "time":{
         "data":"2018/08/13",
         "week":"星期一",
         "hour":"06:17"
         },
+    "join_time":1534141072,
     "is_join":0,
     "name":"kobe"
     }],
@@ -429,11 +446,12 @@ yuedan_id:约单id
     "user_id":2,
     "join_role":2,
     "avatar_url":"/images/animal-fruit/23.jpg",
-    "join_time":{
+    "time":{
         "data":"2018/08/14",
         "week":"星期二",
         "hour":"06:04"
         },
+    "join_time":1534141072,
     "is_join":0,
     "name":"bruce lee"
     }]
