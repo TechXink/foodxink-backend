@@ -4,7 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\StoreParticipator;
 use App\Participator;
+use App\User;
 use App\YueDan;
+use Couchbase\UserSettings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -66,6 +68,8 @@ class ParticipatorController extends Controller
 
         if ($res) {
             //成功了将数据返回
+            //返回跟约人真实数据
+
             //get方式 跟约人列表（基于某个约单下的跟约者）1为发起者,'2'为跟约人
             $sponsor = Participator::where('yuedan_id','=',$id)->where('join_role',1)->get();
             foreach ($sponsor as $key=>$v){
@@ -74,7 +78,8 @@ class ParticipatorController extends Controller
                 $weekArr=array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
                 $time['week'] = $weekArr[$w];
                 $time['hour']=date("h:i",$v['join_time']);
-                $v['join_time']=$time;
+                $v['time']=$time;
+                $v['real_information']=User::where('id','=',$user_id)->select(['id','nickname','headimgurl'])->first();
             }
 
             $genyue = Participator::where('yuedan_id','=',$id)->where('join_role',2)->get();
@@ -84,9 +89,10 @@ class ParticipatorController extends Controller
                 $weekArr=array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
                 $time['week'] = $weekArr[$w];
                 $time['hour']=date("h:i",$v['join_time']);
-                $v['join_time']=$time;
+                $v['time']=$time;
+                $v['real_information']=User::where('id','=',$user_id)->select(['id','nickname','headimgurl'])->first();
             }
-
+//            var_dump($real_information);die;
             return response()->json(['sponsor'=>$sponsor,'genyue'=>$genyue]);
         } else {
             return response()->json(['code' => -1, 'message' => '确定跟约失败']);
