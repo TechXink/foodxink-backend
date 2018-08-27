@@ -79,7 +79,7 @@ class ParticipatorController extends Controller
                 $time['week'] = $weekArr[$w];
                 $time['hour']=date("h:i",$v['join_time']);
                 $v['time']=$time;
-                $v['real_information']=User::where('id','=',$user_id)->select(['id','nickname','headimgurl'])->first();
+                $v['real_information']=User::where('id','=',$v['user_id'])->select(['id','nickname','headimgurl'])->first();
             }
 
             $genyue = Participator::where('yuedan_id','=',$id)->where('join_role',2)->get();
@@ -90,7 +90,7 @@ class ParticipatorController extends Controller
                 $time['week'] = $weekArr[$w];
                 $time['hour']=date("h:i",$v['join_time']);
                 $v['time']=$time;
-                $v['real_information']=User::where('id','=',$user_id)->select(['id','nickname','headimgurl'])->first();
+                $v['real_information']=User::where('id','=',$v['user_id'])->select(['id','nickname','headimgurl'])->first();
             }
             $is_genyue=1;//1为已跟约
             $is_sponsor=0;//1为是发起者
@@ -135,14 +135,18 @@ class ParticipatorController extends Controller
         }
         //get方式 跟约人列表（基于某个约单下的跟约者）1为发起者,'2'为跟约人
         $sponsor = Participator::where('yuedan_id','=',$id)->where('join_role',1)->get();
+        //$user = Participator::where('yuedan_id','=',$id)->where('join_role',1)->select('user_id')->first();
+//        var_dump($sponsor);die;
         foreach ($sponsor as $key=>$v){
+//            var_dump($v);die;
             $time['data']=date("Y/m/d",$v['join_time']);
             $w=date("w",$v['join_time']);
             $weekArr=array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
             $time['week'] = $weekArr[$w];
             $time['hour']=date("h:i",$v['join_time']);
             $v['time']=$time;
-            $v['real_information']=User::where('id','=',$user_id)->select(['id','nickname','headimgurl'])->first();
+            //发起者的真实信息
+            $v['real_information']=User::where('id','=',$v['user_id'])->select(['id','nickname','headimgurl'])->first();
         }
 
         $genyue = Participator::where('yuedan_id','=',$id)->where('join_role',2)->get();
@@ -153,7 +157,7 @@ class ParticipatorController extends Controller
             $time['week'] = $weekArr[$w];
             $time['hour']=date("h:i",$v['join_time']);
             $v['time']=$time;
-            $v['real_information']=User::where('id','=',$user_id)->select(['id','nickname','headimgurl'])->first();
+            $v['real_information']=User::where('id','=',$v['user_id'])->select(['id','nickname','headimgurl'])->first();
         }
 
         return response()->json(['sponsor'=>$sponsor,'genyue'=>$genyue,'is_genyue'=>$is_genyue,'is_sponsor'=>$is_sponsor]);
