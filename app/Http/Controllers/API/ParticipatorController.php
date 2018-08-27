@@ -142,6 +142,7 @@ class ParticipatorController extends Controller
             $time['week'] = $weekArr[$w];
             $time['hour']=date("h:i",$v['join_time']);
             $v['time']=$time;
+            $v['real_information']=User::where('id','=',$user_id)->select(['id','nickname','headimgurl'])->first();
         }
 
         $genyue = Participator::where('yuedan_id','=',$id)->where('join_role',2)->get();
@@ -152,6 +153,7 @@ class ParticipatorController extends Controller
             $time['week'] = $weekArr[$w];
             $time['hour']=date("h:i",$v['join_time']);
             $v['time']=$time;
+            $v['real_information']=User::where('id','=',$user_id)->select(['id','nickname','headimgurl'])->first();
         }
 
         return response()->json(['sponsor'=>$sponsor,'genyue'=>$genyue,'is_genyue'=>$is_genyue,'is_sponsor'=>$is_sponsor]);
