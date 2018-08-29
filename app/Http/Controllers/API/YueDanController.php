@@ -137,7 +137,8 @@ class YueDanController extends Controller
         }
 
         $sponsor_id = '';
-        $yuedanInfo = YueDan::where('create_time','>','unix_timestamp(DATE_SUB(NOW(),INTERVAL 1 DAY)')->where('sponsor_id','<>',$userInfo['id'])->get()->toArray();
+        //$yuedanInfo = YueDan::where('create_time','>','unix_timestamp(DATE_SUB(NOW(),INTERVAL 1 DAY)')->where('sponsor_id','<>',$userInfo['id'])->get()->toArray();
+        $yuedanInfo = YueDan::where('sponsor_id','<>',$userInfo['id'])->where('close_time','>',time())->get()->toArray();
 
         foreach ($yuedanInfo as $key=>$value){
             $yuedanInfo[$key]['image'] = isset($value['image'][0])?$value['image'][0]:'';
