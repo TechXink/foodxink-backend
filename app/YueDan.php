@@ -37,7 +37,7 @@ class YueDan extends Model
         return YueDan::groupBy(['yuedan.id'])->select(['yuedan.id','sponsor_id','title','description','close_time',
             'eat_time','address','latitude','longitude','location_name','image'])->where('sponsor_id', $sponsor_id)
             ->where('close_time', $operator, time())
-        ->join('participator', 'sponsor_id', '=', 'user_id')
+        ->join('participator', 'yuedan.id', '=', 'yuedan_id')->orderBy('yuedan.id','desc')
         ;//->get();
     }
 
