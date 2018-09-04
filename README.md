@@ -293,9 +293,13 @@ yuedan_id:约单id
 
 说明：该接口是否赴约
 
-`PUT ~/api/v1/participator/join/yuedan_id?api_token={api_token}`
+`PUT ~/api/v1/participator/join?api_token={api_token}`
 #### 请求参数
-yuedan_id:约单id
+Get参数说明：
+    api_token:用户token
+Post参数说明：
+    id:约单id
+    custom_id:跟月用户id
 #### 返回说明
 ```json
 // 成功时返回
