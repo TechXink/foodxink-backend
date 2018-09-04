@@ -136,7 +136,6 @@ class YueDanController extends Controller
             return ['status'=>1,'data'=>'用户不存在'];
         }
 
-        $sponsor_id = '';
         //$yuedanInfo = YueDan::where('create_time','>','unix_timestamp(DATE_SUB(NOW(),INTERVAL 1 DAY)')->where('sponsor_id','<>',$userInfo['id'])->get()->toArray();
         $yuedanInfo = YueDan::where('sponsor_id','<>',$userInfo['id'])->where('close_time','>',time())->get()->toArray();
 
