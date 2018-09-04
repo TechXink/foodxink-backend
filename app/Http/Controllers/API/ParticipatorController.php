@@ -243,7 +243,7 @@ class ParticipatorController extends Controller
             return ['status'=>1,'message'=>'用户已过期或不存在'];
         }
 
-        $bool = DB::table("Participator")->where(['yuedan_id'=>$id,'user_id'=>$user_id])->update(['is_join'=>1]);
+        $bool = DB::table("participator")->where(['yuedan_id'=>$id,'user_id'=>$user_id])->update(['is_join'=>1]);
         if($bool || empty($bool)){
             return ['code'=>0,'message'=>'赴约成功'];
         }else{
