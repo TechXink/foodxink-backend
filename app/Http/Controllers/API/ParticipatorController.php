@@ -232,18 +232,28 @@ class ParticipatorController extends Controller
      * @param  $user_id 用户id
      * @return bool
      */
-    public function join($id)
+    public function join(Request $request)
     {
         //Participator::updated(['is_join'=>1]);
 
 		$token = isset($_GET['api_token'])?$_GET['api_token']:'';
+        $custom_id = $request->input('custom_id')?$request->input('custom_id'):'';
+        $id = $request->input('id')?$request->input('id'):'';
+
         $user_id = DB::table("users")->where('api_token',$token)->pluck('id')->first();
 
-        if(!$user_id){
-            return ['status'=>1,'message'=>'用户已过期或不存在'];
+        if(!$user_id || !isset($custom_id) || empty($custom_id)){
+            return ['code'=>1,'message'=>'用户已过期或不存在'];
         }
 
-        $bool = DB::table("participator")->where(['yuedan_id'=>$id,'user_id'=>$user_id])->update(['is_join'=>1]);
+        //判断是否为发起者
+        $join_role = DB::table("participator")->where(['yuedan_id'=>$id,'user_id'=>$user_id])->pluck('join_role')->first();
+        if($join_role !=1){
+            return ['code'=>1,'message'=>'该用户不是活动发起者，暂时无法点击赴约'];
+        }
+
+
+        $bool = DB::table("participator")->where(['yuedan_id'=>$id,'user_id'=>$custom_id])->update(['is_join'=>1]);
         if($bool || empty($bool)){
             return ['code'=>0,'message'=>'赴约成功'];
         }else{
